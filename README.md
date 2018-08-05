@@ -1,5 +1,6 @@
 # s3 proxy test with Netty
 
+s3 requests proxy based on Netty stack    
 
 ## Usage
 
