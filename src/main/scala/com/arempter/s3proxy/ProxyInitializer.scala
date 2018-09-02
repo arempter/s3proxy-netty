@@ -9,7 +9,6 @@ class ProxyInitializer(host: String, port: Int) extends ChannelInitializer[Socke
 
   override def initChannel(ch: SocketChannel): Unit = {
     ch.pipeline()
-      .addLast(new HttpServerCodec())
       .addLast(
         new LoggingHandler(LogLevel.INFO),
         new ProxyFrontend(host, port)
