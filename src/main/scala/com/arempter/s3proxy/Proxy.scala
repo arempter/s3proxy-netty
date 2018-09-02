@@ -15,7 +15,7 @@ object Proxy extends App {
   val s3Port = conf.getConfig("s3.server").getInt("port")
 
   val bossGroup = new NioEventLoopGroup(4)
-  val workerGroup = new NioEventLoopGroup()
+  val workerGroup = new NioEventLoopGroup(4)
 
   try {
     new ServerBootstrap()
@@ -32,3 +32,4 @@ object Proxy extends App {
   }
 
 }
+
