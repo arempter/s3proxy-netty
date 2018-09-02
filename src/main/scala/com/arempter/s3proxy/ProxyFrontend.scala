@@ -4,7 +4,7 @@ import io.netty.bootstrap.Bootstrap
 import io.netty.buffer.Unpooled
 import io.netty.channel._
 
-class ProxyFrontend(host: String, port: Int) extends ChannelInboundHandlerAdapter {
+class ProxyFrontend(host: String, port: Int) extends SimpleChannelInboundHandler[Object] {
 
   var outboundCh: Channel = _
 
@@ -31,7 +31,7 @@ class ProxyFrontend(host: String, port: Int) extends ChannelInboundHandlerAdapte
     })
   }
 
-  override def channelRead(ctx: ChannelHandlerContext, msg: Object): Unit = {
+  override def channelRead0(ctx: ChannelHandlerContext, msg: Object): Unit = {
     if (outboundCh.isActive) {
       outboundCh.writeAndFlush(msg).addListener(new ChannelFutureListener {
         override def operationComplete(future: ChannelFuture): Unit = {
